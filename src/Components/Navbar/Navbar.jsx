@@ -4,7 +4,6 @@ import productsContext from "../../Context/ProductsContext";
 import "./Navbar.css";
 
 export default function Navbar() {
-
   const contextData = useContext(productsContext);
 
   return (
@@ -24,8 +23,16 @@ export default function Navbar() {
 
         <div className="bag-box">
           <a href="#" className="bag">
-            <BsBag className="text-white" onClick={() => contextData.setIsShowCart(true)} />
-            <span className="bag-products-counter">0</span>
+            <BsBag
+              className="text-white"
+              onClick={() => contextData.setIsShowCart(true)}
+            />
+            <span className="bag-products-counter">
+              {contextData.userCart.reduce(
+                (total, product) => total + product.count,
+                0
+              )}
+            </span>
           </a>
         </div>
       </div>
